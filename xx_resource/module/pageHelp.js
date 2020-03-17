@@ -31,7 +31,6 @@ var xx_pageHelp = {
             if (_this.nowPage - 1 > 1) {
                 start = _this.nowPage - 1;
             }
-
             function renderShowStr(page) {
                 if(typeof hrefCallback== "function"){
                     tempHref = hrefCallback(page)
@@ -42,7 +41,6 @@ var xx_pageHelp = {
                     tempOnClick = onclickCallbacl(page);
                 }
             }
-
             if (_this.nowPage > 1) {
                 let pre = _this.nowPage - 1;
                 renderShowStr(1)

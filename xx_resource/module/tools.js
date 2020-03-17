@@ -4,6 +4,69 @@ var xx_tools = {
             return parseInt((new Date()).getTime() / 1000);
         }
     },
+    /**
+     * 若要开启ttl机制 请先运行init
+     */
+    cache:{
+        init:function(){
+            let _this = xxJs.tools;
+            if(!window.localStorage){
+                console.log('不支持localStorage')
+                return false;
+            }else{
+                let int = setInterval(function () {
+                    let list = _this.cache.get('leyList')
+                    if(list == null){
+                        list = [];
+                    }
+                    xxJs.$.each(list,function (k,v) {
+                       let key_ttl = _this.cache.get(v+'_ttl');
+                       if(v&&key_ttl!= null&& _this.time.getIntTime()>key_ttl){
+                           _this.cache.del(v);
+                           delete list[k];
+                           window.localStorage.setItem('leyList',JSON.stringify(list));
+                       }
+                    })
+                },1000);
+                _this.cache.set('IntervalUid',int)
+            }
+        },
+        set:function(key,val,ttl=0){
+            let _this = xxJs.tools;
+            try{
+                window.localStorage.setItem(key,JSON.stringify(val));
+                let list = _this.cache.get('leyList');
+                if(list == null){
+                    list = [];
+                }
+                let pw = true;
+                xxJs.$.each(list,function (k,v) {
+                    if(v==key) pw = false;
+                })
+                if(pw) list.push(key);
+                window.localStorage.setItem('leyList',JSON.stringify(list));
+                if(ttl!=0) {
+                    ttl += _this.time.getIntTime();
+                    window.localStorage.setItem(key + '_ttl', ttl);
+                }
+                return true
+            }catch (e) {
+                console.log(e)
+                return false;
+            }
+        },
+        get:function (key) {
+            try{
+                return JSON.parse(localStorage.getItem(key));
+            }catch (e) {
+                return null
+            }
+        },
+        del:function(key){
+            localStorage.removeItem(key);
+            localStorage.removeItem(key+'_ttl');
+        }
+   },
     date: {
         intToDate: function (timestamp, type = 1) {
             var date = new Date(timestamp * 1000);
