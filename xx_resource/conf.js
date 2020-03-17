@@ -1,6 +1,7 @@
 var xx_conf = {
     xx_app_debug:true,
-    xx_app_base_path:'/jsPro',
+    timeOut:15,
+    xx_app_base_path:'/xxJs',
     xx_conf_path:'/xx_resource',
     xx_module_path:'/xx_resource/module',
     xx_core_path:'/xx_resource/core',

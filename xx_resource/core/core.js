@@ -1,4 +1,6 @@
 if(typeof xxJs != "undefined"){
+    xxJs.loadingMoule = 0;
+    xxJs.loadingTime = 0;
     xxJs.loadCss=function(id,url){
         let _this = xxJs;
         if(_this.$('#'+id).length==0){
@@ -10,6 +12,8 @@ if(typeof xxJs != "undefined"){
         }
     };
     xxJs.requseModule = function (modules,callback) {
+        xxJs.loadingMoule = 0;
+        xxJs.loadingTime = 0;
         let _this = this;
         let conf = _this.conf;
         let path = conf.xx_app_base_path+'/'+conf.xx_module_path+'/';
@@ -29,6 +33,7 @@ if(typeof xxJs != "undefined"){
                                 _this.loadCss(str,_this.conf[str].cssPath)
                                 if (_this.conf.xx_app_debug)   console.log('complete css for'+str);
                             }
+                            xxJs.loadingMoule++;
                             if (_this.conf.xx_app_debug) console.log('complete for '+str);
                             if(typeof callback == "function"){
                                 callback()
@@ -45,7 +50,22 @@ if(typeof xxJs != "undefined"){
         if(typeof modules == 'object'){
             _this.$.each(modules,function (k,v) {
                 if(k==modules.length-1){
-                    xx_main_load(v,callback)
+                    xx_main_load(v)
+                    let int = setInterval(function () {
+                        xxJs.loadingTime ++
+                        if(xxJs.loadingMoule == modules.length){
+                            if(typeof callback == "function"){
+                                callback()
+                                clearInterval(int)
+                                xxJs.loadingTime = 0
+                            }
+                        }
+                        if(xxJs.conf.timeOut <  xxJs.loadingTime){
+                            clearInterval(int)
+                            xxJs.loadingTime = 0
+                            console.log('加载失败')
+                        }
+                    },500)
                 }else{
                     xx_main_load(v)
                 }
@@ -58,7 +78,3 @@ if(typeof xxJs != "undefined"){
         }
     }
 }
-
-
-
-

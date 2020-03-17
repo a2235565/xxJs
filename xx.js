@@ -5,15 +5,24 @@ var xxJs = {
         let _this = this;
         function loadCore() {
             let conf = _this.conf;
-            let path = conf.xx_app_base_path+'/'+conf.xx_core_path;
-            _this.loadJS(path+'/jq.js',function () {
-                _this.$ = xx_$;xx_$ = undefined;xx_jQuery = undefined;
+            let path = conf.xx_app_base_path+''+conf.xx_core_path;
+            if(typeof $ != "undefined"){
+                _this.$ = xx_$;
                 _this.loadJS(path+'/core.js',function () {
                     if(typeof callback == "function"){
                         callback();
                     }
                 })
-            })
+            }else{
+                _this.loadJS(path+'/jq.js',function () {
+                    _this.$ = xx_$;xx_$ = undefined;xx_jQuery = undefined;
+                    _this.loadJS(path+'/core.js',function () {
+                        if(typeof callback == "function"){
+                            callback();
+                        }
+                    })
+                })
+            }
         }
         if(typeof xx_conf == 'undefined'){
             _this.loadJS('./xx_resource/conf.js',function () {
