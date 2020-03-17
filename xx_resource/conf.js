@@ -1,6 +1,6 @@
 var xx_conf = {
     xx_app_debug:true,
-    timeOut:15,
+    timeOut:15,//  秒/10
     xx_app_base_path:'/xxJs',
     xx_conf_path:'/xx_resource',
     xx_module_path:'/xx_resource/module',

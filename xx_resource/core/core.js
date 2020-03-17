@@ -65,7 +65,7 @@ if(typeof xxJs != "undefined"){
                             xxJs.loadingTime = 0
                             console.log('加载失败')
                         }
-                    },500)
+                    },100)
                 }else{
                     xx_main_load(v)
                 }

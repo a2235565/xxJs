@@ -31,6 +31,8 @@
         let app = xxJs;
         let $ = app.$;
         app.requseModule(['pageHelp','renderTools','tools','msgbox'],function () {
+            let msgbox = app.msgbox;
+            msgbox.loaddingshow()
             //工具类
             let tools = app.tools;
             $('#time').html(tools.time.getIntTime());
@@ -64,6 +66,8 @@
                 xx:'测试渲染单环境2',
             });
             //end
+
+            msgbox.loaddinghide()
         })
     });
 
