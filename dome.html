@@ -54,7 +54,7 @@
             //页面渲染器
             let renderTools = app.renderTools;
             renderTools.init();
-            renderTools.renderList('goods',[{goods_id:1,goods_name:213}],'showDiv');
+            renderTools.renderList('goods',[{goods_id:1,goods_name:213},{goods_id:1,goods_name:213},{goods_id:1,goods_name:213}],'showDiv');
             renderTools.renderList('goods1',[{goods_id:1,goods_name:213}],'showDiv1');
             renderTools.setTitle('测试渲染页面');
             renderTools.setKeywords('测试|渲染');
@@ -65,8 +65,10 @@
                 xx:'测试渲染单环境2',
             });
             //end
-
-            msgbox.loaddinghide()
+            //模拟异步网络加载
+            setTimeout(function () {
+                msgbox.loaddinghide()
+            },1000)
         })
     });
 
