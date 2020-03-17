@@ -7,12 +7,10 @@
 ├── readMe.md 
 ├── xx.js 头文件
 └─xx_resource 资源文件
-    │  conf.js  核心配置文件
-    │
-    ├─core
-    │      core.js  核心
-    │      jq.js jq
-    │
+    ├─ conf.js  核心配置文件
+    ├─ core
+    ├   ├──  core.js  核心
+    ├   └──  jq.js jq
     ├─module
     │   ├── msgbox.js
     │   ├── msgbox_conf.js
