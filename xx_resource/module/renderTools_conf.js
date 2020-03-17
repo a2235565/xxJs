@@ -1,0 +1,1 @@
+var xx_renderTools_conf = {};
