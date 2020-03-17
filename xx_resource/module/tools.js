@@ -24,9 +24,14 @@ var xx_tools = {
                        if(v&&key_ttl!= null&& _this.time.getIntTime()>key_ttl){
                            _this.cache.del(v);
                            delete list[k];
-                           window.localStorage.setItem('leyList',JSON.stringify(list));
+
                        }
                     })
+                    let newList = [];
+                    xxJs.$.each(list,function (k,v) {
+                        if(v)newList.push(v);
+                    })
+                    window.localStorage.setItem('leyList',JSON.stringify(newList));
                 },1000);
                 _this.cache.set('IntervalUid',int)
             }

@@ -36,6 +36,17 @@
             //工具类
             let tools = app.tools;
             $('#time').html(tools.time.getIntTime());
+
+            tools.cache.init();
+            tools.cache.set('cacheTest','10',5);
+            console.log(tools.cache.get('cacheTest'),'5秒回收');
+            setTimeout(function () {
+                console.log(tools.cache.get('cacheTest'),'6秒后');
+            },6000)
+
+
+
+
             //分页案例
             let page = app.pageHelp;
             page.setNowPage(tools.query.Get('page'))
