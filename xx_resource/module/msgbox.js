@@ -43,31 +43,6 @@ let xx_msgbox={
         _box.textContent=_msg;
         _box.innerHTML =_msg;
         setTimeout("document.getElementById('xx_isbox').style.display='none'; ",2000);//延时3秒
-    },input:function(msg,callback=null){
-        let _box=document.getElementById('xx_isbox');
-        let conf=this.conf();
-        if(_box==null) {
-            this.init(conf['opacity'],conf['bcolor_success'],conf['fontcolor'],conf['size']);
-            _box=document.getElementById('xx_isbox');
-        }
-        xxJs.$('#xx_isbox').html(' ');
-        _box=document.getElementById('xx_isbox');
-        _box.style.display='block';
-        _box.style.background=conf['bcolor_success'];
-        let temp = document.createElement('div');
-        temp.innerHTML = msg+'<br/><lable for="msgboxinput"><input id="msgboxinput"></lable><a id="msgboxinputsend">提交</a>';
-        _box.appendChild(temp);
-
-        xxJs.$('#msgboxinputsend').click(function(){
-            console.log(xxJs.$('#msgboxinput').val())
-            if(typeof callback =="function"){
-                callback(xxJs.$('#msgboxinput').val())
-            }
-
-            xxJs.$('#xx_isbox').html(' ');
-            xxJs.$('#xx_isbox').hide();
-        });
-        return {'box':'xx_isbox','input':'msgboxinput','button':'msgboxinputsend'};
     },loaddingshow:function(){
         let _box=document.getElementById('loadding');
         let conf=this.conf();
