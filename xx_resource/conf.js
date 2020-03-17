@@ -19,7 +19,7 @@ var xx_conf = {
         this.xx_core_path = path
     },
     /**
-     * 尽量传绝对路径
+     * 尽量传绝对路径 除非你搞得清楚相对路径的真实位置
      * @param basePath
      * @param confPath
      * @param modulePath
